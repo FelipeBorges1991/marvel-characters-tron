@@ -11,8 +11,8 @@ const time = Number(new Date());
 const hash = md5(time + privateKey + publicKey);
 
 function Homepage() {
-  const [characterslist, setCharacters] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [charactersList, setCharacters] = useState([]);
+  const [list, setList] = useState([]);
 
   useEffect(() => {
     async function fetchCharacters() {
@@ -22,16 +22,37 @@ function Homepage() {
         );
 
         setCharacters([response.data.data]);
-        setLoading(false);
+        if (list.length <= 0) {
+          setList(charactersList);
+        }
       } catch (err) {
         console.error(err);
-        setLoading(false);
       }
     }
     fetchCharacters();
-  }, []);
+  }, [list, charactersList]);
 
-  return <div>Marvel</div>;
+  return (
+    <div className="container">
+      {charactersList.map((characters) => {
+        return (
+          <div className="card" key={characters.id}>
+            <img
+              className="card-img-top"
+              src={characters.thumbnail}
+              alt="Characters cartoons"
+            />
+            <div className="card-body">
+              <h4 className="card-title">{characters.name}</h4>
+              <a href="#!" className="btn btn-primary">
+                See details
+              </a>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
 }
 
 export default Homepage;
