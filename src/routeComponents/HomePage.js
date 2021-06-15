@@ -3,6 +3,8 @@ import axios from "axios";
 import md5 from "md5";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import CharacterCard from "../components/CharacterCard";
+
 const publicKey = "c7dbb9aaf046c6e7dc40db5aebfffabd";
 const privateKey = "94b44e6503b2e1660c4e2136da55279f3c61d314";
 
@@ -34,20 +36,10 @@ function Homepage() {
 
   return (
     <div className="container">
-      {charactersList.map((characters) => {
+      {list.map((item, pos) => {
         return (
-          <div className="card" key={characters.id}>
-            <img
-              className="card-img-top"
-              src={characters.thumbnail}
-              alt="Characters cartoons"
-            />
-            <div className="card-body">
-              <h4 className="card-title">{characters.name}</h4>
-              <a href="#!" className="btn btn-primary">
-                See details
-              </a>
-            </div>
+          <div className="container" key={pos}>
+            <CharacterCard key={item.id} item={item}></CharacterCard>
           </div>
         );
       })}

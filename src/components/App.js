@@ -6,7 +6,7 @@ import Homepage from "../routeComponents/HomePage";
 function App() {
   return (
     <BrowserRouter>
-      <div className="vh-100">
+      <div className="container">
         <Switch>
           <Route exact path="/" component={Homepage} />
         </Switch>
